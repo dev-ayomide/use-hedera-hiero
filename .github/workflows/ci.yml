@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Type check
+        run: pnpm -r lint
+
+      - name: Run tests
+        run: pnpm --filter use-hedera test:coverage
+
+      - name: Build all packages
+        run: pnpm -r build
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v4
+        if: success()
+        continue-on-error: true
+        with:
+          files: ./packages/use-hedera/coverage/lcov.info
+          flags: unittests
