@@ -38,7 +38,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/use-hedera"
+    "url": "https://github.com/dev-ayomide/use-hedera-hiero"
   },
   "peerDependencies": {
     "react": ">=18.0.0",

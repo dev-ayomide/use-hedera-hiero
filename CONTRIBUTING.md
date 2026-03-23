@@ -82,7 +82,7 @@ Signed-off-by: John Smith <john@example.com>
 1. Fork and clone the repository
 
 ```bash
-git clone https://github.com/yourusername/use-hedera.git
+git clone https://github.com/dev-ayomide/use-hedera-hiero.git
 cd use-hedera
 ```
 

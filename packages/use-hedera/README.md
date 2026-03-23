@@ -2,7 +2,7 @@
 
 React hooks for [Hedera / Hiero](https://hedera.com) networks — TypeScript-first, composable, and production-oriented.
 
-This package is published from the [`use-hedera` monorepo](https://github.com/yourusername/use-hedera). For full documentation, examples, and the Next.js demo, see the **repository root [README.md](../../README.md)**.
+This package is published from the [`use-hedera` monorepo](https://github.com/dev-ayomide/use-hedera-hiero). For full documentation, examples, and the Next.js demo, see the **repository root [README.md](../../README.md)**.
 
 ## Install
 

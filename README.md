@@ -2,7 +2,7 @@
 
 > React hooks for Hedera/Hiero networks — TypeScript-first, composable, production-ready
 
-[![CI](https://github.com/yourusername/use-hedera/actions/workflows/ci.yml/badge.svg)](https://github.com/yourusername/use-hedera/actions/workflows/ci.yml)
+[![CI](https://github.com/dev-ayomide/use-hedera-hiero/actions/workflows/ci.yml/badge.svg)](https://github.com/dev-ayomide/use-hedera-hiero/actions/workflows/ci.yml)
 [![npm version](https://badge.fury.io/js/use-hedera.svg)](https://badge.fury.io/js/use-hedera)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -13,6 +13,18 @@ Instead of writing 40 lines of SDK boilerplate, you can now do:
 ```tsx
 const { balance, isLoading } = useHederaBalance("0.0.1234");
 ```
+
+## What is this? (plain English)
+
+**For a friend who doesn’t write code:**
+
+Hedera is a public network people use to build apps that need **shared, trusted record-keeping**—balances, tokens, timestamps, messages, and scheduled payments.
+
+**use-hedera** is a **toolkit for app builders** who use **React** (a common way to make websites and web apps). Instead of every team reinventing the same low-level “plumbing,” this library gives them **ready-made building blocks**: “show this account’s balance,” “read messages from this feed,” “send a token,” “schedule a transfer later.”
+
+The **small website in `apps/demo`** is not the product by itself—it’s a **showroom**: it proves the toolkit works on Hedera **testnet** (play money). The real product is the **library** other developers can install and reuse in **their** products.
+
+---
 
 ## Features
 
@@ -198,14 +210,19 @@ import type {
 
 Check out the [demo app](./apps/demo) for live examples of all hooks in action.
 
-To run locally:
+To run locally (from repo root):
 
 ```bash
 pnpm install
-cd apps/demo
-cp .env.example .env.local
-# Add your testnet credentials
 pnpm dev
+```
+
+Or from `apps/demo`: copy `apps/demo/.env.example` to `apps/demo/.env.local`, add testnet credentials, then `pnpm dev`.
+
+Optional — create a **testnet topic** for the Consensus demo (uses the same `.env.local`):
+
+```bash
+pnpm --filter demo create-topic
 ```
 
 Get free testnet HBAR from: https://portal.hedera.com
@@ -224,6 +241,70 @@ use-hedera/
 └── apps/demo/                    # Next.js demo app
 ```
 
+## Product strategy (MVP, roadmap & hackathon alignment)
+
+This section summarizes how the project is positioned for **sustained use** beyond a hackathon and maps to common **judging rubrics** (feasibility, execution, success, validation).
+
+### MVP (what ships today)
+
+| Area | Delivered |
+|------|-----------|
+| **Library** | `HederaProvider` + 7 hooks: client, account, balance, mirror path, HCS messages, HTS token ops, scheduled transactions |
+| **Quality** | TypeScript types, Vitest tests, GitHub Actions CI (lint, test, build) |
+| **Demo** | Next.js app exercising read + write flows on testnet |
+| **Open source** | MIT license, `CONTRIBUTING.md`, DCO sign-offs (`git commit -s`) |
+
+### Lean canvas (business model at a glance)
+
+| Block | Summary |
+|--------|---------|
+| **Problem** | React teams avoid or slow-roll Hedera apps because SDK setup and patterns are repetitive and easy to get wrong. |
+| **Customer segments** | Frontend / full-stack teams building on Hedera or Hiero-compatible networks; educators and hackathon participants. |
+| **Unique value** | **Composable hooks** with loading/error/refetch conventions—less boilerplate, faster shipping, consistent UX patterns. |
+| **Solution** | Open-source npm package `use-hedera` + reference demo. |
+| **Channels** | GitHub, npm, Hedera/Hiero Discord & forums, hackathons, blog posts, tutorial links. |
+| **Costs** | Maintainer time; no infra bill for the library itself (apps pay their own network fees). |
+| **Revenue (optional / future)** | Sponsorships, paid support, or a future “pro” layer—**not required** for core OSS adoption. |
+
+### Go-to-market (GTM)
+
+1. **Publish** stable releases on npm and keep the repo public with a green CI badge.  
+2. **Document** install + quickstart (this README) and link the demo.  
+3. **Reach** Hedera Discord developers and share minimal reproduction examples.  
+4. **Iterate** from GitHub issues and discussion threads.
+
+### Validation & feedback loops
+
+| When | What |
+|------|------|
+| **Now** | Issues and PRs on GitHub; comments from hackathon judges and peers. |
+| **Next** | Short survey link in README or pinned discussion; 5–10 short calls or async feedback from teams building React apps on Hedera. |
+| **Ongoing** | Track which hooks are requested most; prioritize missing flows (e.g. wallet connectors, more mirror endpoints). |
+
+### Success metrics (developer tooling)
+
+End-user MAU/TPS are **indirect** for a library. We focus on **ecosystem leverage**:
+
+- npm **downloads** and **dependent** repositories over time  
+- GitHub **stars**, **forks**, and **active issues** (signal of use)  
+- **Apps and tutorials** linking to or depending on `use-hedera`  
+- **Fewer support threads** about basic SDK wiring (qualitative)
+
+Stronger Hedera adoption follows when **more apps ship faster** using these patterns.
+
+### Roadmap (post-hackathon)
+
+- Semver releases and changelog  
+- Optional **HashConnect** / wallet recipes in docs  
+- More mirror-backed hooks or helpers where patterns repeat  
+- Demo **a11y** pass (focus order, contrast, live regions) where needed  
+
+### Design decisions (execution)
+
+- **Hooks + provider** instead of class singletons—fits React and testability.  
+- **Mirror Node for reads, SDK for writes**—matches Hedera security and architecture guidance.  
+- **Demo uses `NEXT_PUBLIC_*` keys** for hackathon speed; **production apps** should keep signing keys on a server or use a wallet flow, not in the browser bundle.
+
 ## Contributing
 
 We welcome contributions! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
@@ -232,7 +313,7 @@ All commits must be signed off with the [Developer Certificate of Origin](https:
 
 ## License
 
-MIT © [Your Name]
+MIT © use-hedera contributors
 
 ## Acknowledgments
 
